@@ -1,0 +1,10 @@
+---
+- name: HAPROXYサーバへ証明書と秘密鍵を合成した上でファイルアップロード
+  copy:
+    content: "{{ lookup('file', haproxy_src_crt_path) + '\n' + lookup('file', haproxy_src_key_path) }}"
+    dest: "{{ haproxy_dest_crt_and_key_path }}"
+    mode: "{{ haproxy_dest_crt_and_key_mode }}"
+    owner: "{{ haproxy_dest_files_owner }}"
+    group: "{{ haproxy_dest_files_group }}"
+    force: "{{ haproxy_dest_crt_and_key_force_create }}"
+  notify: restart_service_haproxy

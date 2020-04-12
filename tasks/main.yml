@@ -1,0 +1,8 @@
+---
+- name: サービス型HAPROXYの証明書更新
+  include_tasks: service_haproxy.yml
+  when: haproxy_daemon_type == 'service'
+
+- name: コンテナ型HAPROXYの証明書更新
+  include_tasks: docker_haproxy.yml
+  when: haproxy_daemon_type == 'docker'

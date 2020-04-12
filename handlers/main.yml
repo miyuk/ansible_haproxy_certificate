@@ -1,0 +1,13 @@
+---
+- name: restart_service_haproxy
+  service:
+    name: haproxy
+    state: restarted
+  when: haproxy_restart | bool
+
+- name: restart_docker_haproxy
+  docker_compose:
+    project_src: "{{ haproxy_docker_dir }}"
+    services: ["{{ haproxy_docker_name }}"]
+    restarted: yes
+  when: haproxy_restart | bool

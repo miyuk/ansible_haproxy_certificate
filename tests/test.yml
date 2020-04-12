@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    haproxy_src_crt_path: "{{ certificate_directory }}/{{ certificate_crt_filename }}"
+    haproxy_src_key_path: "{{ certificate_directory }}/{{ certificate_crt_filename }}"
+    haproxy_dest_crt_and_key_force_create: yes
+    haproxy_dest_crt_and_key_path: /etc/haproxy/ssl/server.crt
+    haproxy_dest_crt_and_key_mode: 0600
+    haproxy_dest_files_owner: root
+    haproxy_dest_files_group: root
+    haproxy_restart: yes
+    haproxy_docker_dir: /opt/haproxy
+    haproxy_daemon_type: docker
+    haproxy_docker_name: haproxy
+  roles:
+    - ../..
